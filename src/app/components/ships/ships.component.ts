@@ -21,7 +21,6 @@ export class ShipsComponent implements OnInit {
 
     this.shipsService.getShips(this.page).subscribe((ships) => {
       if(this.page > 1) {
-        console.log('concat')
         this.dataList.results = this.dataList.results.concat(ships.results)
       } else {
         this.dataList = ships
