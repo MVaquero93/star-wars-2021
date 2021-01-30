@@ -8,7 +8,7 @@ import { PrincipalComponent } from './principal.component';
 const routes: Routes = [
   { path: '', component: PrincipalComponent,
   children: [
-    { path: 'ships', component: ShipsComponent },
+    { path: 'ships', loadChildren: () => import(`../../components/ships/ships.module`).then(m => m.ShipsModule)  },
     { path: 'pageOne', component: PageOneComponent },
     { path: 'pageTwo', component: PageTwoComponent },
   ] }
