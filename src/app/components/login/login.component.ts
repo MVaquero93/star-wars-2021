@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 // JSON
 import usersList from 'src/assets/json/users.json';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -31,12 +33,10 @@ export class LoginComponent implements OnInit {
   }
   loginUser() {
     if (this.loginForm.invalid) { return }
-    // TODO : Falta integrar el servicio para autentificar al usuario
-    // JSON simulando usuarios
-    var userLogin = this.loginForm.value.username;
-    var filterJson = this.users.filter(function (user) { return user.first_name === userLogin  });
-    if (filterJson.length > 0) {
-      this.router.navigate(['/principal/ships'])
+    const user = this.authService.login(this.loginForm.value.username)
+    if (user) {
+      localStorage.user = JSON.stringify(user);
+      this.router.navigate(['principal/ships']);
     } else {
       this.unregistered = true;
     }
