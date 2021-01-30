@@ -4,9 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Components
 import { AppComponent } from './app.component';
-import {LoginModule} from './components/login/login.module';
-import {RegisterModule} from './components/register/register.module';
 import {PrincipalModule} from './components/principal/principal.module';
+import {AuthModule} from './pages/auth/auth.module';
 
 
 @NgModule({
@@ -16,8 +15,7 @@ import {PrincipalModule} from './components/principal/principal.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LoginModule,
-    RegisterModule,
+    AuthModule,
     PrincipalModule
   ],
   providers: [],

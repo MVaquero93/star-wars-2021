@@ -2,18 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { PrincipalComponentsRoutingModule } from './principal-routing.module';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 // Components
 import { PageOneComponent } from '../page-one/page-one.component';
 import { PageTwoComponent } from '../page-two/page-two.component';
-import { ShipsDetailsComponent } from '../ships/ships-details/ships-details.component';
 import {PrincipalComponent} from './principal.component';
+import {ShipsModule} from '../ships/ships.module';
 
 @NgModule({
   declarations: [
     PrincipalComponent,
-    ShipsDetailsComponent,
     PageOneComponent,
     PageTwoComponent
   ],
@@ -21,7 +19,7 @@ import {PrincipalComponent} from './principal.component';
     CommonModule,
     PrincipalComponentsRoutingModule,
     HttpClientModule,
-    NgxPaginationModule,
+    ShipsModule
   ]
 })
 export class PrincipalModule { }
