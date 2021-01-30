@@ -18,18 +18,21 @@ export class AuthService {
     userList = [...userList, user];
     localStorage.user = JSON.stringify(user);
     localStorage.users = JSON.stringify(userList);
-    this.router.navigate(['/principal/ships']);
+    this.redirectToShips();
   }
 
+  redirectToShips() {
+    return this.router.navigate(['/principal/ships']);
+  }
+
+  getByUsername(username): any {
+    return this.getUsers().find((user) => user.username === username);
+  }
 
   private getUsers() {
     if (!localStorage.users) {
       localStorage.users = JSON.stringify([]);
     }
     return JSON.parse(localStorage.users);
-  }
-
-  private getByUsername(username): any {
-    return this.getUsers().find((user) => user.username === username);
   }
 }
