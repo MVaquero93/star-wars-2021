@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
+import {ApiShipResult} from "../models/ship";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class ShipsService {
   constructor( private http: HttpClient ) {}
 
   getShips(page): Observable<any>{
-    return this.http.get(this.url + '?page=' + page).pipe(
+    return this.http.get<ApiShipResult>(this.url + '?page=' + page).pipe(
       map( data => { return data })
       );
   }

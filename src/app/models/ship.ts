@@ -1,4 +1,4 @@
-export class Ship {
+export interface Ship {
   name: string
   model: string
   manufacturer: string
@@ -17,4 +17,11 @@ export class Ship {
   created: string
   edited: string
   url: string
+}
+
+export interface ApiShipResult {
+  count: number
+  next?: string
+  previous?: string
+  results: Ship[]
 }
