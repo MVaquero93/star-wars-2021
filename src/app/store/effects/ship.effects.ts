@@ -20,7 +20,10 @@ export class ShipEffects {
     switchMap((action) => this.shipsService.getShips(action.page)
       .pipe(
         map(response => {
-          return new fromShipActions.LoadShipsSuccess(response);
+            if(response.next) {
+              return new fromShipActions.LoadMoreShips(response, action.page + 1 )
+            }
+            return new fromShipActions.LoadShipsSuccess(response);
         }),
         catchError(error => of(new fromShipActions.LoadShipsFail(error)))
       )
@@ -33,6 +36,9 @@ export class ShipEffects {
       switchMap((action) => this.shipsService.getShips(action.page)
         .pipe(
           map(response => {
+            if(response.next) {
+              return new fromShipActions.LoadMoreShips(response, action.page + 1)
+            }
             return new fromShipActions.LoadMoreShipsSuccess(response);
           }),
           catchError(error => of(new fromShipActions.LoadShipsFail(error)))

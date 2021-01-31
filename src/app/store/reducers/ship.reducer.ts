@@ -9,7 +9,7 @@ export interface ShipState {
 }
 
 export const initialState: ShipState = {
-  data: {} as ApiShipResult,
+  data: {results: []} as ApiShipResult,
   loaded: false,
   loading: false,
   error: ''
@@ -32,9 +32,15 @@ export function reducer(state = initialState, action: fromShipActions.ShipAction
       }
     }
     case fromShipActions.LOAD_MORE_SHIPS: {
+      console.log(state.data, action.payload)
+
       return {
         ...state,
-        loading: true
+        loading: true,
+        data: {
+          ...action.payload,
+          results: [...state.data.results, ...action.payload.results]
+        }
       }
     }
     case fromShipActions.LOAD_MORE_SHIPS_SUCCESS: {
@@ -42,7 +48,10 @@ export function reducer(state = initialState, action: fromShipActions.ShipAction
         ...state,
         loading: false,
         loaded: true,
-        ...action.payload
+        data: {
+          ...action.payload,
+          results: [...state.data.results, ...action.payload.results]
+        }
       }
     }
     case fromShipActions.LOAD_SHIPS_FAIL: {

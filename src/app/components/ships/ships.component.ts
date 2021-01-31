@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ShipsService } from 'src/app/services/ships.service';
 import {Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 import {ApiShipResult} from '../../models/ship';
@@ -22,14 +21,10 @@ export class ShipsComponent implements OnInit {
   }
 
   loadShips() {
-    this.store.dispatch(new fromStore.LoadShips(1))
-    console.log('SHIPS -->', this.dataList)
-    if(this.dataList.next) {
-      this.page = this.page + 1
-      this.store.dispatch(new fromStore.LoadMoreShips(this.page))
-    }
+    this.store.dispatch(new fromStore.LoadShips(this.page))
     this.store.select(fromStore.getShips).subscribe((ships) => {
       this.dataList = ships
+      console.log('SHIPS -->', this.dataList)
     })
   }
 }

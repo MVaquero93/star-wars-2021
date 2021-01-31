@@ -16,7 +16,7 @@ export class LoadShips implements Action {
 export class LoadMoreShips implements Action {
   readonly type = LOAD_MORE_SHIPS;
 
-  constructor(public page: number){}
+  constructor(public payload: ApiShipResult, public page: number){}
 }
 
 export class LoadMoreShipsSuccess implements Action {
