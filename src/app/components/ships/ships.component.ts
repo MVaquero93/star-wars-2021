@@ -11,35 +11,25 @@ import {ApiShipResult} from '../../models/ship';
 })
 export class ShipsComponent implements OnInit {
 
-  public dataList: ApiShipResult[];
+  public dataList: ApiShipResult;
   public page = 1
-  // public ships: ApiShipResult[];
 
-  constructor(private store: Store<fromStore.AppState>,
-              private shipsService: ShipsService) {
-    store.select('ships').subscribe( resp => {
-      this.dataList = resp.data
-    })
+  constructor(private store: Store<fromStore.AppState>) {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new fromStore.LoadShips())
-    // this.loadShips()
+    this.loadShips()
   }
 
-  // loadShips() {
-  //
-  //   this.shipsService.getShips(this.page).subscribe((ships) => {
-  //     if(this.page > 1) {
-  //       this.ships = this.dataList.results.concat(ships.results)
-  //     } else {
-  //       this.ships = ships
-  //     }
-  //     console.log('SHIPS -->', this.dataList)
-  //     if(ships.next) {
-  //       this.page = this.page + 1
-  //       this.loadShips()
-  //     }
-  //   })
-  // }
+  loadShips() {
+    this.store.dispatch(new fromStore.LoadShips(1))
+    console.log('SHIPS -->', this.dataList)
+    if(this.dataList.next) {
+      this.page = this.page + 1
+      this.store.dispatch(new fromStore.LoadMoreShips(this.page))
+    }
+    this.store.select(fromStore.getShips).subscribe((ships) => {
+      this.dataList = ships
+    })
+  }
 }

@@ -1,8 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Ship} from "../../../models/ship";
-import {Store} from "@ngrx/store";
-import * as fromStore from '../../../store';
-import {ShipsService} from '../../../services/ships.service';
 declare var $: any;
 
 
@@ -23,14 +20,6 @@ export class ShipsDetailsComponent implements OnInit {
   titleDetails: string = '';
   modelDetails: string = '';
   starship_class: string = '';
-
-  constructor(private store: Store<fromStore.AppState>,
-              private shipsService: ShipsService) {
-    // store.select('ships').subscribe( resp => {
-    //   this.ships = resp.data
-    //   console.log(this.ships)
-    // })
-  }
 
   ngOnInit(): void {
       this.config = {
