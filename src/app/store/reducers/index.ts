@@ -9,7 +9,7 @@ export const reducers = {
   ships: fromShipReducer.reducer
 };
 
-export const getState = (state) => state;
 
 export const getShipsState = createFeatureSelector<fromShipReducer.ShipState>('ships')
 export const getShips = createSelector(getShipsState, fromShipReducer.getShips);
+export const areShipsLoaded = createSelector(getShipsState, fromShipReducer.getShipsLoaded)

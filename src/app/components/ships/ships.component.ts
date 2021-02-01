@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 import {ApiShipResult} from '../../models/ship';
+import {loadState, saveState} from "../../helpers/store-cache";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-ships',
@@ -21,8 +23,12 @@ export class ShipsComponent implements OnInit {
   }
 
   loadShips() {
-    this.store.dispatch(new fromStore.LoadShips(this.page))
-    this.store.select(fromStore.getShips).subscribe((ships) => {
+    if(!loadState() || !loadState().loaded) {
+      this.store.dispatch(new fromStore.LoadShips(this.page))
+    }
+    this.store.select(fromStore.getShips).pipe(
+      tap(() => this.store.select(fromStore.getShipsState).subscribe((state) => saveState(state)))
+    ).subscribe((ships) => {
       this.dataList = ships
       console.log('SHIPS -->', this.dataList)
     })

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
 import {ApiShipResult} from "../models/ship";
+import {shareReplay} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShipsService {
-
+  $data: Observable<any>
   url: string = 'https://swapi.dev/api/starships/'
   headerDict = {
     'Authorization': 'none',
@@ -18,11 +18,11 @@ export class ShipsService {
     headers: new HttpHeaders(this.headerDict),
   };
 
-  constructor( private http: HttpClient ) {}
+  constructor( private http: HttpClient ) {
+    // this.$dat
+  }
 
   getShips(page): Observable<any>{
-    return this.http.get<ApiShipResult>(this.url + '?page=' + page).pipe(
-      map( data => { return data })
-      );
+    return this.http.get<ApiShipResult>(this.url + '?page=' + page)
   }
 }

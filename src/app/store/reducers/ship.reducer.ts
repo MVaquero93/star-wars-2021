@@ -1,5 +1,6 @@
 import * as fromShipActions from '../actions/ship.actions';
 import {ApiShipResult} from '../../models/ship';
+import {loadState} from '../../helpers/store-cache';
 
 export interface ShipState {
   data: ApiShipResult
@@ -15,7 +16,7 @@ export const initialState: ShipState = {
   error: ''
 }
 
-export function reducer(state = initialState, action: fromShipActions.ShipActions) {
+export function reducer(state = loadState() || initialState, action: fromShipActions.ShipActions) {
   switch(action.type){
     case fromShipActions.LOAD_SHIPS: {
       return {

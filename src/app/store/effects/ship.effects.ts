@@ -3,7 +3,7 @@ import {Observable, of} from 'rxjs';
 import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
 import {Action} from '@ngrx/store';
 import * as fromShipActions from '../actions/ship.actions';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {catchError, map, shareReplay, switchMap} from 'rxjs/operators';
 import {ShipsService} from '../../services/ships.service';
 import {ShipState} from '../reducers/ship.reducer';
 
