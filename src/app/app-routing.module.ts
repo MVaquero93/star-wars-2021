@@ -5,7 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import(`src/app/pages/auth/auth.module`).then(m => m.AuthModule) },
+  { path: '', loadChildren: () => import(`src/app/components/auth/auth.module`).then(m => m.AuthModule) },
   { path: 'principal', loadChildren: () => import(`./components/principal/principal.module`).then(m => m.PrincipalModule) }
   // { path: 'ships', loadChildren: () => import(`./components/ships/ships.module`).then(m => m.ShipsModule) }
 ];
