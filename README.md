@@ -1,6 +1,13 @@
-# Getting Started 
+# Simple Angular app with Ngrx
 
-`npm i`  for install
-Run `npm run start` for a dev server. 
+This is a simple Angular 9 app wich retrieve data from start-wars api. It emulates a login with json data from assets folder and keep the session up with local storage. Ngrx its used to load data from API and save/read it from store.
+
+
+## Getting Started 
+
+```bash
+npm i
+npm run start
 Navigate to `http://localhost:4200/`.
+```
 
